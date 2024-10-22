@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'; // Importe o useEffect
 import axios from 'axios';
 import apiConfig from '../apiConfig'; 
+import '../UserList.css';
 
 function UsuarioForm() {
   const [nome, setNome] = useState('');
   const [mensagemSucesso, setMensagemSucesso] = useState(''); 
-  const [usuarios, setUsuarios] = useState([]); // Estado para a lista de usuários
+  const [usuarios, setUsuarios] = useState([]); 
 
-  // Função para buscar usuários do backend
   const buscarUsuarios = async () => { 
     try {
       const response = await axios.get(`${apiConfig.baseUrl}/api/usuarios`);
@@ -18,7 +18,6 @@ function UsuarioForm() {
     }
   };
 
-  // UseEffect para carregar usuários ao iniciar e após adicionar
   useEffect(() => { 
     const carregarUsuarios = async () => {
       const usuariosDoBackend = await buscarUsuarios();
@@ -37,7 +36,6 @@ function UsuarioForm() {
         setMensagemSucesso(''); 
       }, 3000);
 
-      // Buscar usuários atualizados após adicionar
       await buscarUsuarios().then((usuariosDoBackend) => { 
         setUsuarios(usuariosDoBackend);
       });
@@ -47,21 +45,36 @@ function UsuarioForm() {
   };
 
   return (
-    <div> {/* Adicione uma div pai para o formulário e a lista */}
-       {/* Formulário para adicionar usuário */}
-       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="nome">Nome do usuário:</label>
-          <input 
-            type="text" 
-            id="nome" 
-            value={nome} 
-            onChange={(e) => setNome(e.target.value)} 
-            required 
-          />
-        </div>
-        <button type="submit">Adicionar Usuário</button>
-      </form>
+    <div> 
+  
+<form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}> 
+  <div style={{ marginBottom: '10px' }}> 
+    <label htmlFor="nome" style={{ display: 'block', marginBottom: '5px' }}>Nome do usuário:</label>
+    <input 
+      type="text" 
+      id="nome" 
+      value={nome} 
+      onChange={(e) => setNome(e.target.value)} 
+      required 
+      style={{ 
+        width: '100%', 
+        padding: '8px',
+        border: '1px solid #ccc', 
+        borderRadius: '4px'
+      }}
+    />
+  </div>
+  <button type="submit" style={{ 
+    padding: '8px 15px',
+    backgroundColor: '#4CAF50', 
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer'
+  }}>
+    Adicionar Usuário
+  </button>
+</form>
 
       {mensagemSucesso && <div className="mensagem-sucesso">{mensagemSucesso}</div>}
 
