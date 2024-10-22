@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'; // Importe o useEffect
+import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import apiConfig from '../apiConfig'; 
 
 function UsuarioForm() {
   const [nome, setNome] = useState('');
   const [mensagemSucesso, setMensagemSucesso] = useState(''); 
-  const [usuarios, setUsuarios] = useState([]); // Estado para a lista de usuários
+  const [usuarios, setUsuarios] = useState([]); 
 
-  // Função para buscar usuários do backend
   const buscarUsuarios = async () => { 
     try {
       const response = await axios.get(`${apiConfig.baseUrl}/api/usuarios`);
@@ -18,7 +17,6 @@ function UsuarioForm() {
     }
   };
 
-  // UseEffect para carregar usuários ao iniciar e após adicionar
   useEffect(() => { 
     const carregarUsuarios = async () => {
       const usuariosDoBackend = await buscarUsuarios();
@@ -37,7 +35,6 @@ function UsuarioForm() {
         setMensagemSucesso(''); 
       }, 3000);
 
-      // Buscar usuários atualizados após adicionar
       await buscarUsuarios().then((usuariosDoBackend) => { 
         setUsuarios(usuariosDoBackend);
       });
@@ -47,8 +44,7 @@ function UsuarioForm() {
   };
 
   return (
-    <div> {/* Adicione uma div pai para o formulário e a lista */}
-       {/* Formulário para adicionar usuário */}
+    <div> 
        <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="nome">Nome do usuário:</label>
