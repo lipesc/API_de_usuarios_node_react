@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Importe o useEffect
+import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import apiConfig from '../apiConfig'; 
 import '../UserList.css';
