@@ -3,17 +3,36 @@ h2 {
   font-size: 1.5em; 
   color: #333; 
 }
-
+body {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;    /* Centraliza verticalmente */
+  min-height: 100vh;      /* Garante que o body ocupe a altura total da tela */
+}
+.container {
+  display: flex;
+  flex-direction: column; /* Alinha o conteúdo verticalmente */
+  justify-content: center;
+  align-items: center;
+  width: 80%; /* Largura do container */
+  margin: 0 auto; /* Margem automática para centralizar horizontalmente */
+  padding: 20px;
+}
+input[type=text] {
+  border: 2px solid red;
+  border-radius: 4px;
+}
 ul {
   list-style: none;
   padding: 0;
 }
 
-li { 
-  background-color: #f4f4f4;
+ul li  { 
+  background-color: #cfcfcf;
   padding: 10px;
   margin-bottom: 5px; 
   border-radius: 4px;
+  width: 50%;
 }
 
 li:hover { 

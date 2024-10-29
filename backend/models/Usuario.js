@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const usuarioSchema = new mongoose.Schema({
-  nome: { 
+  nome: {
+    type: String, require: true
+  },
+  last: {
     type: String, require: true
   }
 });

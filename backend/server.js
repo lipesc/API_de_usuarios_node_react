@@ -1,4 +1,4 @@
-const express= require('express');
+const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -7,13 +7,13 @@ const Usuario = require('./models/Usuario')
 
 const app = express();
 const PORT = 3001;
-
-mongoose.connect('mongodb://localhost:27017/db-js')
-.then(() => console.log('Conectado ao MongoDB')) 
-.catch(err => console.error('Erro ao conectar ao MongoDB:', err));
-
 app.use(cors());
 app.use(express.json());
+
+mongoose.connect('mongodb://localhost:27017/db-js')
+  .then(() => console.log('Conectado ao MongoDB'))
+  .catch(err => console.error('Erro ao conectar ao MongoDB:', err));
+
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -41,22 +41,23 @@ app.get('/api/usuarios', async (req, res) => {
   try {
     const usuarios = await Usuario.find();
     res.json(usuarios);
+
   } catch (error) {
     console.error("Erro ao buscar usuarios", error);
-    res.status(500).json({error: 'Erro ao buscar usuarios.'});
+    res.status(500).json({ error: 'Erro ao buscar usuarios.' });
   }
 });
 
 app.post('/api/usuarios', async (req, res) => {
-  console.log("Requisição POST recebida em /api/usuarios"); 
+  console.log("Requisição POST recebida em /api/usuarios");
   try {
     const novoUsuario = new Usuario(req.body);
     await novoUsuario.save();
     res.status(201).send(`Usuario ${novoUsuario} criado`);
-} catch (error) {
-  console.error("Error ao criar o usuario");
-  res.status(500).json({error: "Error ao criar o usuario "});
-}
+  } catch (error) {
+    console.error("Error ao criar o usuario");
+    res.status(500).json({ error: "Error ao criar o usuario " });
+  }
 });
 
 
