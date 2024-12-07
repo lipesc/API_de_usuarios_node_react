@@ -16,7 +16,6 @@ node server.js\
 
 abrir outro terminal\
 cd frotend\
-node server.js\
 npm start
 
 abrir [localhost:3001/](http://localhost:3001)
